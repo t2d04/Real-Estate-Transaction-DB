@@ -8,20 +8,20 @@
 const char* host = "localhost"; // change if necessary
 const char* user = "root";      // change if necessary
 const char* pw = "#wldbsEl0204";       // change if necessary
-const char* db = "proj";      // µ¥ÀÌÅÍº£ÀÌ½º ÀÌ¸§
+const char* db = "proj";      // ë°ì´í„°ë² ì´ìŠ¤ ì´ë¦„
 
 #define MAX_LEN 13000
 
-// menu¸¦ Ç¥½ÃÇÏ´Â ÇÔ¼ö
+// menuë¥¼ í‘œì‹œí•˜ëŠ” í•¨ìˆ˜
 void menu();
-// Äõ¸®¸¦ ½ÇÇàÇÏ°Ô ÇÏ´Â ÇÔ¼ö
+// ì¿¼ë¦¬ë¥¼ ì‹¤í–‰í•˜ê²Œ í•˜ëŠ” í•¨ìˆ˜
 void execute_query(MYSQL* connection, const char* query);
 
-// »ç¿ëÀÚÀÇ inputÀ» °ü¸®ÇÏ´Â ÇÔ¼ö
+// ì‚¬ìš©ìì˜ inputì„ ê´€ë¦¬í•˜ëŠ” í•¨ìˆ˜
 void input(MYSQL* connection);
 
-// °¢ Äõ¸® ¹× ¼­ºêÄõ¸®¸¦ ½ÇÇàÇÏ´Â ÇÔ¼ö
-// ¼­ºêÄõ¸®¿¡ ´ëÇØ Ãß°¡ÀûÀÎ ÇÔ¼ö¸¦ µÎÁö ¾Ê¾ÒÀ½ (¼­ºêÄõ¸®µµ Äõ¸®ÇÔ¼ö¿¡¼­ ½ÇÇà)
+// ê° ì¿¼ë¦¬ ë° ì„œë¸Œì¿¼ë¦¬ë¥¼ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
+// ì„œë¸Œì¿¼ë¦¬ì— ëŒ€í•´ ì¶”ê°€ì ì¸ í•¨ìˆ˜ë¥¼ ë‘ì§€ ì•Šì•˜ìŒ (ì„œë¸Œì¿¼ë¦¬ë„ ì¿¼ë¦¬í•¨ìˆ˜ì—ì„œ ì‹¤í–‰)
 void Q1(MYSQL* connection);
 void Q2(MYSQL* connection);
 void Q3(MYSQL* connection);
@@ -110,11 +110,11 @@ void execute_query(MYSQL* connection, const char* query) {
         }
     }
     else {
-        printf("Error: Query failed: %s\n", mysql_error(connection)); // ¿À·ù ³»¿ë Ãâ·Â
+        printf("Error: Query failed: %s\n", mysql_error(connection)); // ì˜¤ë¥˜ ë‚´ìš© ì¶œë ¥
     }
 }
 
-// »ç¿ëÀÚ·ÎºÎÅÍ inputÀ» ¹Ş¾Æ ±×¿¡ ¸Â°Ô Äõ¸® ÇÔ¼ö¸¦ ½ÇÇà½ÃÅ´
+// ì‚¬ìš©ìë¡œë¶€í„° inputì„ ë°›ì•„ ê·¸ì— ë§ê²Œ ì¿¼ë¦¬ í•¨ìˆ˜ë¥¼ ì‹¤í–‰ì‹œí‚´
 void input(MYSQL* connection) {
     int choice;
 
@@ -154,8 +154,8 @@ void input(MYSQL* connection) {
     }
 }
 
-// 1. ¸¶Æ÷±¸ ¸Å¹° Ã£±â
-// 1-1. ±× Áß¿¡¼­ 10¾ï°ú 15¾ï »çÀÌÀÎ ¸Å¹° Ã£±â
+// 1. ë§ˆí¬êµ¬ ë§¤ë¬¼ ì°¾ê¸°
+// 1-1. ê·¸ ì¤‘ì—ì„œ 10ì–µê³¼ 15ì–µ ì‚¬ì´ì¸ ë§¤ë¬¼ ì°¾ê¸°
 void Q1(MYSQL* connection) {
 
     int subchoice = 0;
@@ -180,7 +180,7 @@ void Q1(MYSQL* connection) {
         "    LEFT JOIN Contract C ON E.post_ID = C.post_ID "
         "    WHERE C.post_ID IS NULL"
         ") AS Temp "
-        "WHERE district_g = '¸¶Æ÷±¸'";
+        "WHERE district_g = 'ë§ˆí¬êµ¬'";
     execute_query(connection, query1);
 
     if (FLAG1) {
@@ -191,14 +191,14 @@ void Q1(MYSQL* connection) {
             "    LEFT JOIN Contract C ON E.post_ID = C.post_ID "
             "    WHERE C.post_ID IS NULL"
             ") AS Temp "
-            "WHERE district_g = '¸¶Æ÷±¸' "
+            "WHERE district_g = 'ë§ˆí¬êµ¬' "
             "AND p_lump BETWEEN 100000 AND 150000";
         execute_query(connection, query1_1);
     }
 }
 
-// 2. 8ÇĞ±º¿¡ ÀÖ´Â ¸Å¹° Ã£±â
-// 2-1. ±× Áß¿¡¼­ Ä§½Ç 4°³, È­Àå½Ç 2°³ ÀÌ»óÀÎ ¸Å¹° Ã£±â
+// 2. 8í•™êµ°ì— ìˆëŠ” ë§¤ë¬¼ ì°¾ê¸°
+// 2-1. ê·¸ ì¤‘ì—ì„œ ì¹¨ì‹¤ 4ê°œ, í™”ì¥ì‹¤ 2ê°œ ì´ìƒì¸ ë§¤ë¬¼ ì°¾ê¸°
 void Q2(MYSQL* connection) {
 
     int subchoice = 0;
@@ -220,40 +220,42 @@ void Q2(MYSQL* connection) {
     execute_query(connection, query1);
 
     if (FLAG1) {
-        const char* query1_1 = "SELECT estate_name, district_g, district_d, street, building_num, p_lump FROM Estate WHERE district_g = '¸¶Æ÷±¸' AND p_lump BETWEEN 100000 AND 150000";
+        const char* query1_1 = "SELECT estate_name, district_g, district_d, street, building_num, p_lump FROM Estate WHERE district_g = 'ë§ˆí¬êµ¬' AND p_lump BETWEEN 100000 AND 150000";
         execute_query(connection, query1_1);
     }
 }
 
-// 3. 2022³â¿¡ °¡Àå ³ôÀº ¼öÀÍÀ» ¿Ã¸° °øÀÎÁß°³»ç Ã£±â
-// 3-1. 2023³â¿¡ °¡Àå ³ôÀº ¼öÀÍÀ» ¿Ã¸° ¼øÀ¸·Î k¸íÀÇ °øÀÎÁß°³»ç Ã£±â
-// 3-2. 2021³â¿¡ °¡Àå ³·Àº ¼öÀÍÀ» ¿Ã¸° ÇÏÀ§ 10% °øÀÎÁß°³»ç Ã£±â
+/*
+
+// 3. 2022ë…„ì— ê°€ì¥ ë†’ì€ ìˆ˜ìµì„ ì˜¬ë¦° ê³µì¸ì¤‘ê°œì‚¬ ì°¾ê¸°
+// 3-1. 2023ë…„ì— ê°€ì¥ ë†’ì€ ìˆ˜ìµì„ ì˜¬ë¦° ìˆœìœ¼ë¡œ këª…ì˜ ê³µì¸ì¤‘ê°œì‚¬ ì°¾ê¸°
+// 3-2. 2021ë…„ì— ê°€ì¥ ë‚®ì€ ìˆ˜ìµì„ ì˜¬ë¦° í•˜ìœ„ 10% ê³µì¸ì¤‘ê°œì‚¬ ì°¾ê¸°
 void Q3(MYSQL* connection) {
 
 
 }
 
-// 4. °¢ °øÀÎÁß°³»ç º°·Î 2022³â¿¡ ¼º»ç½ÃÅ² ¸Å¹°ÀÇ Æò±Õ±İ¾×, ½ÃÀå¿¡ ÀÖ¾ú´ø ±â°£ Ã£±â
-// 4-1. °¢ °øÀÎÁß°³»ç º°·Î 2023³â¿¡ ÆÇ¸ÅÇÑ °¡Àå ºñ½Ñ ¸Å¹°ÀÇ °¡°İ Ã£±â
-// 4-2. °¢ °øÀÎÁß°³»ç º°·Î ¸Å¹°ÀÌ ½ÃÀå¿¡ °¡Àå ¿À·¡ ÀÖ¾ú´ø ±â°£ Ã£±â
+// 4. ê° ê³µì¸ì¤‘ê°œì‚¬ ë³„ë¡œ 2022ë…„ì— ì„±ì‚¬ì‹œí‚¨ ë§¤ë¬¼ì˜ í‰ê· ê¸ˆì•¡, ì‹œì¥ì— ìˆì—ˆë˜ ê¸°ê°„ ì°¾ê¸°
+// 4-1. ê° ê³µì¸ì¤‘ê°œì‚¬ ë³„ë¡œ 2023ë…„ì— íŒë§¤í•œ ê°€ì¥ ë¹„ì‹¼ ë§¤ë¬¼ì˜ ê°€ê²© ì°¾ê¸°
+// 4-2. ê° ê³µì¸ì¤‘ê°œì‚¬ ë³„ë¡œ ë§¤ë¬¼ì´ ì‹œì¥ì— ê°€ì¥ ì˜¤ë˜ ìˆì—ˆë˜ ê¸°ê°„ ì°¾ê¸°
 void Q4(MYSQL* connection) {
 
 
 }
 
-// 5. °¡Àå ºñ½Ñ studio, one-bed, multi-bed apt, detachedÀÇ »çÁø °¢°¢ º¸¿©ÁÖ±â
+// 5. ê°€ì¥ ë¹„ì‹¼ studio, one-bed, multi-bed apt, detachedì˜ ì‚¬ì§„ ê°ê° ë³´ì—¬ì£¼ê¸°
 void Q5(MYSQL* connection) {
 
 
 }
 
-// 6. ÀÌ¹Ì ÆÇ¸ÅµÈ ¸Å¹°ÀÇ °¡°İ, ±¸¸ÅÀÚ, °øÀÎÁß°³»ç, ³¯Â¥ Ã£±â
+// 6. ì´ë¯¸ íŒë§¤ëœ ë§¤ë¬¼ì˜ ê°€ê²©, êµ¬ë§¤ì, ê³µì¸ì¤‘ê°œì‚¬, ë‚ ì§œ ì°¾ê¸°
 void Q6(MYSQL* connection) {
 
 
 }
 
-// 7. »õ·Î¿î °øÀÎÁß°³»ç¸¦ µ¥ÀÌÅÍº£ÀÌ½º¿¡ Ãß°¡ÇÏ±â
+// 7. ìƒˆë¡œìš´ ê³µì¸ì¤‘ê°œì‚¬ë¥¼ ë°ì´í„°ë² ì´ìŠ¤ì— ì¶”ê°€í•˜ê¸°
 void Q7(MYSQL* connection) {
 
     printf("**************************\n");
@@ -261,3 +263,4 @@ void Q7(MYSQL* connection) {
 
 }
 
+*/
